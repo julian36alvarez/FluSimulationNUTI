@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<sweep runs="1">
+	<parameter name="space_size" type="constant" constant_type="int" value="10"></parameter>
+	<parameter name="population_size" type="constant" constant_type="int" value="1000000"></parameter>
+	<parameter name="total_residences" type="constant" constant_type="int" value="500000"></parameter>
+	<parameter name="residence_min" type="constant" constant_type="int" value="1"></parameter>
+	<parameter name="residence_max" type="constant" constant_type="int" value="4"></parameter>
+	<parameter name="total_workspaces" type="constant" constant_type="int" value="10000"></parameter>
+	<parameter name="total_entretainment" type="constant" constant_type="int" value="5000"></parameter>
+	<parameter name="hours_work_week" type="constant" constant_type="int" value="40"></parameter>
+	<parameter name="movement_speed" type="constant" constant_type="int" value="3"></parameter>
+	<parameter name="initial_infected" type="constant" constant_type="int" value="10"></parameter>
+</sweep>
