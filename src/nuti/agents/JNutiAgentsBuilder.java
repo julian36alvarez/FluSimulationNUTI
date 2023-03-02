@@ -6,6 +6,7 @@ import repast.simphony.context.space.continuous.ContinuousSpaceFactoryFinder;
 import repast.simphony.context.space.grid.GridFactory;
 import repast.simphony.context.space.grid.GridFactoryFinder;
 import repast.simphony.dataLoader.ContextBuilder;
+import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.space.continuous.ContinuousSpace;
 import repast.simphony.space.continuous.RandomCartesianAdder;
 import repast.simphony.space.grid.BouncyBorders;
@@ -19,20 +20,25 @@ public class JNutiAgentsBuilder implements ContextBuilder<Object> {
 	public Context build(Context<Object> context) {
 		context.setId("nuti-agents");
 		
-		// Grid y Space tienen 4000 que representa 4km
+		// Grid y Space tienen 10000 que representa 10km
 		ContinuousSpaceFactory spaceFactory = ContinuousSpaceFactoryFinder
 				.createContinuousSpaceFactory(null);
 		ContinuousSpace<Object> space = spaceFactory.createContinuousSpace(
 				"space", context, new RandomCartesianAdder<Object>(),
 				new repast.simphony.space.continuous.BouncyBorders(), 
-				4000, 4000);
+				10000, 10000);
 
 		GridFactory gridFactory = GridFactoryFinder.createGridFactory(null);
 		Grid<Object> grid = gridFactory.createGrid("grid", context,
 				new GridBuilderParameters<Object>(new BouncyBorders(),
 						new SimpleGridAdder<Object>(), true, 
-						4000, 4000
+						10000, 10000 
 						));
+		
+		// parar luego de 4 semanas, cada tick son 5 minutos -> total de 40320 ticks
+		// 1 semana son 10080 ticks
+		RunEnvironment.getInstance().endAt(40320);
+	
 		
 		return context;
 	}
