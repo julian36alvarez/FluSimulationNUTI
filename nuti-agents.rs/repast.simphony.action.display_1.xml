@@ -4,21 +4,45 @@
   <styles>
     <entry>
       <string>nuti.agents.Human</string>
-      <string>repast.simphony.visualizationOGL2D.DefaultStyleOGL2D</string>
+      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
     <entry>
-      <string>nuti.agents.Zombie</string>
+      <string>nuti.agents.Entretainment</string>
+      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
+    </entry>
+    <entry>
+      <string>nuti.agents.Population</string>
+      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
+    </entry>
+    <entry>
+      <string>nuti.agents.Residence</string>
+      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
+    </entry>
+    <entry>
+      <string>nuti.agents.Workplace</string>
       <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
   </styles>
   <editedStyles>
     <entry>
       <string>nuti.agents.Human</string>
-      <null/>
+      <string>nuti.agents.Human.style_1.xml</string>
     </entry>
     <entry>
-      <string>nuti.agents.Zombie</string>
-      <string>nuti.agents.Zombie.style_0.xml</string>
+      <string>nuti.agents.Entretainment</string>
+      <string>nuti.agents.Entretainment.style_0.xml</string>
+    </entry>
+    <entry>
+      <string>nuti.agents.Population</string>
+      <string>nuti.agents.Population.style_1.xml</string>
+    </entry>
+    <entry>
+      <string>nuti.agents.Residence</string>
+      <string>nuti.agents.Residence.style_0.xml</string>
+    </entry>
+    <entry>
+      <string>nuti.agents.Workplace</string>
+      <string>nuti.agents.Workplace.style_0.xml</string>
     </entry>
   </editedStyles>
   <netStyles/>
@@ -31,7 +55,7 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>-1089476201</hashCode>
+    <hashCode>-1747170867</hashCode>
   </schedParams>
   <layoutClassName>foo.bar.baz</layoutClassName>
   <layoutProjection>space</layoutProjection>
@@ -39,11 +63,23 @@
   <layerOrder>
     <entry>
       <string>nuti.agents.Human</string>
-      <int>1</int>
+      <int>4</int>
     </entry>
     <entry>
-      <string>nuti.agents.Zombie</string>
+      <string>nuti.agents.Entretainment</string>
+      <int>3</int>
+    </entry>
+    <entry>
+      <string>nuti.agents.Population</string>
       <int>0</int>
+    </entry>
+    <entry>
+      <string>nuti.agents.Residence</string>
+      <int>2</int>
+    </entry>
+    <entry>
+      <string>nuti.agents.Workplace</string>
+      <int>1</int>
     </entry>
   </layerOrder>
   <projections>

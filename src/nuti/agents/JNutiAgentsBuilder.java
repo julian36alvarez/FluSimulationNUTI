@@ -26,15 +26,15 @@ public class JNutiAgentsBuilder implements ContextBuilder<Object> {
 		ContinuousSpace<Object> space = spaceFactory.createContinuousSpace(
 				"space", context, new RandomCartesianAdder<Object>(),
 				new repast.simphony.space.continuous.BouncyBorders(), 
-				10000, 10000);
+				50, 50);
 
 		GridFactory gridFactory = GridFactoryFinder.createGridFactory(null);
 		Grid<Object> grid = gridFactory.createGrid("grid", context,
 				new GridBuilderParameters<Object>(new BouncyBorders(),
 						new SimpleGridAdder<Object>(), true, 
-						10000, 10000 
+						50, 50 
 						));
-		
+		context.add(new Human(space, grid, "enfermo", 40, 20));
 		// parar luego de 4 semanas, cada tick son 5 minutos -> total de 40320 ticks
 		// 1 semana son 10080 ticks
 		RunEnvironment.getInstance().endAt(40320);
