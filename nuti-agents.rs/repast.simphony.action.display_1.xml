@@ -3,7 +3,7 @@
   <type>2D</type>
   <styles>
     <entry>
-      <string>nuti.agents.Human</string>
+      <string>nuti.agents.SickHuman</string>
       <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
     <entry>
@@ -11,7 +11,11 @@
       <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
     <entry>
-      <string>nuti.agents.Population</string>
+      <string>nuti.agents.IncubatingHuman</string>
+      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
+    </entry>
+    <entry>
+      <string>nuti.agents.HealthyHuman</string>
       <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
     <entry>
@@ -25,28 +29,42 @@
   </styles>
   <editedStyles>
     <entry>
-      <string>nuti.agents.Human</string>
-      <string>nuti.agents.Human.style_1.xml</string>
+      <string>nuti.agents.SickHuman</string>
+      <string>nuti.agents.SickHuman.style_0.xml</string>
     </entry>
     <entry>
       <string>nuti.agents.Entretainment</string>
-      <string>nuti.agents.Entretainment.style_0.xml</string>
+      <string>nuti.agents.Entretainment.style_2.xml</string>
     </entry>
     <entry>
-      <string>nuti.agents.Population</string>
-      <string>nuti.agents.Population.style_1.xml</string>
+      <string>nuti.agents.IncubatingHuman</string>
+      <string>nuti.agents.IncubatingHuman.style_0.xml</string>
+    </entry>
+    <entry>
+      <string>nuti.agents.HealthyHuman</string>
+      <string>nuti.agents.HealthyHuman.style_0.xml</string>
     </entry>
     <entry>
       <string>nuti.agents.Residence</string>
-      <string>nuti.agents.Residence.style_0.xml</string>
+      <string>nuti.agents.Residence.style_2.xml</string>
     </entry>
     <entry>
       <string>nuti.agents.Workplace</string>
-      <string>nuti.agents.Workplace.style_0.xml</string>
+      <string>nuti.agents.Workplace.style_3.xml</string>
     </entry>
   </editedStyles>
-  <netStyles/>
-  <editedNetStyles/>
+  <netStyles>
+    <entry>
+      <string>infection network</string>
+      <string>repast.simphony.visualizationOGL2D.DefaultEdgeStyleOGL2D</string>
+    </entry>
+  </netStyles>
+  <editedNetStyles>
+    <entry>
+      <string>infection network</string>
+      <null/>
+    </entry>
+  </editedNetStyles>
   <frequency>ON_MOVE</frequency>
   <schedParams>
     <start>1.0</start>
@@ -55,23 +73,27 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>-1747170867</hashCode>
+    <hashCode>-1861252781</hashCode>
   </schedParams>
   <layoutClassName>foo.bar.baz</layoutClassName>
   <layoutProjection>space</layoutProjection>
   <layoutInterval>0</layoutInterval>
   <layerOrder>
     <entry>
-      <string>nuti.agents.Human</string>
-      <int>4</int>
+      <string>nuti.agents.SickHuman</string>
+      <int>1</int>
     </entry>
     <entry>
       <string>nuti.agents.Entretainment</string>
+      <int>5</int>
+    </entry>
+    <entry>
+      <string>nuti.agents.IncubatingHuman</string>
       <int>3</int>
     </entry>
     <entry>
-      <string>nuti.agents.Population</string>
-      <int>0</int>
+      <string>nuti.agents.HealthyHuman</string>
+      <int>4</int>
     </entry>
     <entry>
       <string>nuti.agents.Residence</string>
@@ -79,7 +101,7 @@
     </entry>
     <entry>
       <string>nuti.agents.Workplace</string>
-      <int>1</int>
+      <int>0</int>
     </entry>
   </layerOrder>
   <projections>
@@ -88,11 +110,23 @@
       <attributes/>
       <type>continuous space</type>
     </repast.simphony.scenario.data.ProjectionData>
+    <repast.simphony.scenario.data.ProjectionData>
+      <id>infection network</id>
+      <attributes/>
+      <type>network</type>
+    </repast.simphony.scenario.data.ProjectionData>
   </projections>
   <visualizationProperties class="repast.simphony.visualization.UnitSizeLayoutProperties">
     <unitSize>15.0</unitSize>
   </visualizationProperties>
   <projectionDescriptors>
+    <entry>
+      <string>infection network</string>
+      <repast.simphony.visualization.engine.DefaultProjectionDescriptor>
+        <proj reference="../../../../projections/repast.simphony.scenario.data.ProjectionData[2]"/>
+        <props/>
+      </repast.simphony.visualization.engine.DefaultProjectionDescriptor>
+    </entry>
     <entry>
       <string>space</string>
       <repast.simphony.visualization.continuous.ContinuousProjectionDescriptor>

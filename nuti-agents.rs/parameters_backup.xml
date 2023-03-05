@@ -20,11 +20,6 @@
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 											/>
-				<parameter name="residence_max" displayName="Residence Max" type="int" 
-						defaultValue="4" 
-						isReadOnly="false" 
-						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
-											/>
 				<parameter name="total_workspaces" displayName="Total Workspaces" type="int" 
 						defaultValue="100" 
 						isReadOnly="false" 
