@@ -26,6 +26,7 @@ public abstract class Human {
     protected int timeEntertained;
     protected boolean usesMask;
     private GridPoint gridHousePoint;
+    protected int step;
 
     public Human(ContinuousSpace<Object> space, Grid<Object> grid, String status, int timeWorked, int timeEntertained, boolean usesMask) {
         this.space = space;
@@ -35,20 +36,21 @@ public abstract class Human {
         this.timeEntertained = timeEntertained;
         this.usesMask = usesMask;
     }
-    
-	@ScheduledMethod(start = 1, interval = 1)
-	public void step() {
-		GridPoint pt = grid.getLocation(this);
 
-		GridCellNgh<Workplace> nghCreator = new GridCellNgh<Workplace>(grid, pt, Workplace.class, 1, 1);
-		List<GridCell<Workplace>> gridCells = nghCreator.getNeighborhood(true);
+    @ScheduledMethod(start = 1, interval = 1)
+    public void step() {
+        step++;
+        GridPoint pt = grid.getLocation(this);
+
+        GridCellNgh<Workplace> nghCreator = new GridCellNgh<Workplace>(grid, pt, Workplace.class, 1, 1);
+        List<GridCell<Workplace>> gridCells = nghCreator.getNeighborhood(true);
 
         GridCellNgh<Entertainment> nghCreator2 = new GridCellNgh<Entertainment>(grid, pt, Entertainment.class, 1, 1);
         List<GridCell<Entertainment>> gridCells2 = nghCreator2.getNeighborhood(true);
 
-		SimUtilities.shuffle(gridCells, RandomHelper.getUniform());
+        SimUtilities.shuffle(gridCells, RandomHelper.getUniform());
 
-		GridPoint pointWithWorkPlace = null;
+        GridPoint pointWithWorkPlace = null;
         GridPoint pointWithEntertainment = null;
 
 
@@ -80,44 +82,71 @@ public abstract class Human {
             System.out.println("Stay at home");
             space.moveTo(this, gridHousePoint.getX(), gridHousePoint.getY());
         }
-        
-        infect();
 
-	}
-	
-	public void infect() {
-		GridPoint pt = grid.getLocation(this);
-		List<Object> healthyHuman = new ArrayList<Object>();
-		for (Object obj : grid.getObjectsAt(pt.getX(), pt.getY())) {
-			if (obj instanceof HealthyHuman) {
-				healthyHuman.add(obj);
-			}
-		}
+        if (this.isInfected()) {
+            infect();
+        }
 
-		if (healthyHuman.size() > 0) {
-			int index = RandomHelper.nextIntFromTo(0, healthyHuman.size() - 1);
-			Object obj = healthyHuman.get(index);
-			NdPoint spacePt = space.getLocation(obj);
-			Context<Object> context = ContextUtils.getContext(obj);
-			context.remove(obj);
-			SickHuman sickHuman = new SickHuman(space, grid, "incubando", this.timeWorked, this.timeEntertained, false);
-			sickHuman.setGridHousePoint(this.getGridHousePoint());
-			context.add(sickHuman);
-			space.moveTo(sickHuman, spacePt.getX(), spacePt.getY());
-			grid.moveTo(sickHuman, pt.getX(), pt.getY());
-			
-		}
-	}
+        if (this.isCure()) {
+            cure();
+        }
 
 
-	private void moveTowards(GridPoint pt) {
-		NdPoint myPoint = space.getLocation(this);
-		NdPoint otherPoint = new NdPoint(pt.getX(), pt.getY());
-		double angle = SpatialMath.calcAngleFor2DMovement(space, myPoint, otherPoint);
-		space.moveByVector(this, 1, angle, 0);
-		grid.moveTo(this, (int)space.getLocation(this).getX(), (int)space.getLocation(this).getY());
-	}
-    
+    }
+
+    protected abstract boolean isInfected();
+
+    protected abstract boolean isCure();
+
+    public void infect() {
+        GridPoint pt = grid.getLocation(this);
+        List<Object> healthyHuman = new ArrayList<Object>();
+        for (Object obj : grid.getObjectsAt(pt.getX(), pt.getY())) {
+            if (obj instanceof HealthyHuman) {
+                healthyHuman.add(obj);
+            }
+        }
+
+        if (healthyHuman.size() > 0) {
+            int index = RandomHelper.nextIntFromTo(0, healthyHuman.size() - 1);
+            Object obj = healthyHuman.get(index);
+            NdPoint spacePt = space.getLocation(obj);
+
+            Context<Object> context = ContextUtils.getContext(obj);
+            context.remove(obj);
+            SickHuman sickHuman = new SickHuman(space, grid, "incubando", this.timeWorked, this.timeEntertained, false);
+            sickHuman.setGridHousePoint(this.getGridHousePoint());
+            context.add(sickHuman);
+            space.moveTo(sickHuman, spacePt.getX(), spacePt.getY());
+            grid.moveTo(sickHuman, pt.getX(), pt.getY());
+
+        }
+    }
+
+    public void cure() {
+        GridPoint pt = grid.getLocation(this);
+        NdPoint spacePt = space.getLocation(this);
+        Context<Object> context = ContextUtils.getContext(this);
+        context.remove(this);
+        HealthyHuman healthyHuman = new HealthyHuman(space, grid, "sano", this.timeWorked, this.timeEntertained, false);
+        healthyHuman.setGridHousePoint(this.getGridHousePoint());
+        context.add(healthyHuman);
+        space.moveTo(healthyHuman, spacePt.getX(), spacePt.getY());
+        grid.moveTo(healthyHuman, pt.getX(), pt.getY());
+
+
+    }
+
+
+    private void moveTowards(GridPoint pt) {
+        NdPoint myPoint = space.getLocation(this);
+        NdPoint otherPoint = new NdPoint(pt.getX(), pt.getY());
+        double angle = SpatialMath.calcAngleFor2DMovement(space, myPoint, otherPoint);
+        space.moveByVector(this, 1, angle, 0);
+        grid.moveTo(this, (int) space.getLocation(this).getX(), (int) space.getLocation(this).getY());
+    }
+
+
     public NdPoint getLocation() {
         return space.getLocation(this);
     }
@@ -125,7 +154,7 @@ public abstract class Human {
     public void move(int x, int y) {
         grid.moveTo(this, x, y);
     }
-    
+
     // Getters y setters
     public ContinuousSpace<Object> getSpace() {
         return space;
@@ -183,5 +212,5 @@ public abstract class Human {
         this.gridHousePoint = gridHousePoint;
     }
 
-   
+
 }

@@ -108,7 +108,7 @@ public class JNutiAgentsBuilder implements ContextBuilder<Object> {
             // Agregar el humano a la residencia más cercana
             if (closestResidence != null) {
                 closestResidence.addHuman(human);
-                
+
                 humanCountAdded++;
 
                 GridPoint pt = grid.getLocation(closestResidence);
@@ -123,13 +123,14 @@ public class JNutiAgentsBuilder implements ContextBuilder<Object> {
             }
         }
 
-        // parar luego de 4 semanas, cada tick son 5 minutos -> total de 40320 ticks
-        // 1 semana son 10080 ticks
+        // parar luego de 4 semanas, cada tick son 5 minutos -> total de 8064 ticks
+        // 1 semana son 2016 ticks
+        // 1 dia son 288 ticks
 
 	    /*if (RunEnvironment.getInstance().isBatch()) {
 	        RunEnvironment.getInstance().endAt(40320);
 	    }*/
-        RunEnvironment.getInstance().endAt(40320);
+        RunEnvironment.getInstance().endAt(8064);
 
         return context;
     }
