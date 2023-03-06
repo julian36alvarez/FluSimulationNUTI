@@ -1,3 +1,18 @@
-# NUTI - Paradigmas de Computación HPC y Sistemas Multiagente, Simulación de la propagación de la gripa mediante modelado basado en agentes
+# NUTI - Paradigmas de Computación HPC y Sistemas Multiagente
 
-![](https://github.com/julian36alvarez/nuti-agents/blob/master/nuti.gif)
+# Simulación de la propagación de la gripa mediante modelado basado en agentes
+
+Para la implementación de este laboratorio realizamos el trabajo en Repast Symphony, un framework de modelado basado en agentes que nos permite crear modelos de simulación de sistemas complejos.
+
+# Concurrencia
+
+Repast Symphony permite usar las ventajas de tener múltiples procesadores escondiendo la complejidad de tener que realizar un modelo computacional paralelo complejo desde cero.
+
+# Demo
+
+![](./nuti.gif)
+
+# Integrantes
+
+- [Julián Álvarez](https://github.com/julian36alvarez)
+- [Julián Benítez](https://github.com/julianbenitez99)
