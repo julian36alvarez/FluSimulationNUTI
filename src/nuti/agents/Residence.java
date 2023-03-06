@@ -9,12 +9,14 @@ public class Residence {
     private ContinuousSpace<Object> space;
     private int maxCapacity;
     private int currentCapacity;
+    private int id;
     
-    public Residence(Grid<Object> grid, ContinuousSpace<Object> space, int maxCapacity) {
+    public Residence(Grid<Object> grid, ContinuousSpace<Object> space, int maxCapacity, int id) {
         this.grid = grid;
         this.space = space;
         this.maxCapacity = maxCapacity;
         this.currentCapacity = 0;
+        this.id = id;
     }
     
     public void addHuman(Human human) {
@@ -30,4 +32,9 @@ public class Residence {
     public int getMaxCapacity() {
         return maxCapacity;
     }
+
+    public int getId() {
+        return id;
+    }
+
 }

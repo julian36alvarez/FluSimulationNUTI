@@ -21,6 +21,7 @@ public abstract class Human {
     protected int timeWorked;
     protected int timeEntertained;
     protected boolean usesMask;
+    private int idHouse;
 
     public Human(ContinuousSpace<Object> space, Grid<Object> grid, String status, int timeWorked, int timeEntertained, boolean usesMask) {
         this.space = space;
@@ -38,10 +39,45 @@ public abstract class Human {
 		GridCellNgh<Workplace> nghCreator = new GridCellNgh<Workplace>(grid, pt, Workplace.class, 1, 1);
 		List<GridCell<Workplace>> gridCells = nghCreator.getNeighborhood(true);
 
+        GridCellNgh<Entertainment> nghCreator2 = new GridCellNgh<Entertainment>(grid, pt, Entertainment.class, 1, 1);
+        List<GridCell<Entertainment>> gridCells2 = nghCreator2.getNeighborhood(true);
+
 		SimUtilities.shuffle(gridCells, RandomHelper.getUniform());
 
 		GridPoint pointWithWorkPlace = null;
-		int maxCount = -1;
+        GridPoint pointWithEntertainment = null;
+
+
+        // random desition to go to work or to entertainment place or to stay at home
+        int random = RandomHelper.nextIntFromTo(0, 2);
+        if (random == 0) {
+            int maxCount = -1;
+            for (GridCell<Workplace> cell : gridCells) {
+                if (cell.size() > maxCount) {
+                    pointWithWorkPlace = cell.getPoint();
+                    maxCount = cell.size();
+                }
+            }
+            moveTowards(pointWithWorkPlace);
+            setTimeWorked(getTimeWorked() + 1);
+            System.out.println("getTimeWorked() = " + getTimeWorked());
+        } else if (random == 1) {
+            int maxCount = -1;
+            for (GridCell<Entertainment> cell : gridCells2) {
+                if (cell.size() > maxCount) {
+                    pointWithEntertainment = cell.getPoint();
+                    maxCount = cell.size();
+                }
+            }
+            moveTowards(pointWithEntertainment);
+            setTimeEntertained(getTimeEntertained() + 1);
+            System.out.println("getTimeEntertained() = " + getTimeEntertained());
+        } else {
+            System.out.println("Stay at home");
+        }
+
+
+		/*int maxCount = -1;
 		for (GridCell<Workplace> cell : gridCells) {
 			if (cell.size() > maxCount) {
 				pointWithWorkPlace = cell.getPoint();
@@ -49,6 +85,8 @@ public abstract class Human {
 			}
 		}
 		moveTowards(pointWithWorkPlace);
+        setTimeWorked(getTimeWorked() + 1);
+        System.out.println("getTimeWorked() = " + getTimeWorked());*/
 	}
 
 
@@ -115,5 +153,13 @@ public abstract class Human {
 
     public void setUsesMask(boolean usesMask) {
         this.usesMask = usesMask;
+    }
+
+    public int getIdHouse() {
+        return idHouse;
+    }
+
+    public void setIdHouse(int idHouse) {
+        this.idHouse = idHouse;
     }
 }
