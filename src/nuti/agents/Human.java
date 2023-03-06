@@ -1,7 +1,9 @@
 package nuti.agents;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import repast.simphony.context.Context;
 import repast.simphony.engine.schedule.ScheduledMethod;
 import repast.simphony.query.space.grid.GridCell;
 import repast.simphony.query.space.grid.GridCellNgh;
@@ -9,8 +11,10 @@ import repast.simphony.random.RandomHelper;
 import repast.simphony.space.SpatialMath;
 import repast.simphony.space.continuous.ContinuousSpace;
 import repast.simphony.space.continuous.NdPoint;
+import repast.simphony.space.graph.Network;
 import repast.simphony.space.grid.Grid;
 import repast.simphony.space.grid.GridPoint;
+import repast.simphony.util.ContextUtils;
 import repast.simphony.util.SimUtilities;
 
 public abstract class Human {
@@ -76,18 +80,33 @@ public abstract class Human {
             System.out.println("Stay at home");
             space.moveTo(this, gridHousePoint.getX(), gridHousePoint.getY());
         }
+        
+        infect();
 
-
-		/*int maxCount = -1;
-		for (GridCell<Workplace> cell : gridCells) {
-			if (cell.size() > maxCount) {
-				pointWithWorkPlace = cell.getPoint();
-				maxCount = cell.size();
+	}
+	
+	public void infect() {
+		GridPoint pt = grid.getLocation(this);
+		List<Object> healthyHuman = new ArrayList<Object>();
+		for (Object obj : grid.getObjectsAt(pt.getX(), pt.getY())) {
+			if (obj instanceof HealthyHuman) {
+				healthyHuman.add(obj);
 			}
 		}
-		moveTowards(pointWithWorkPlace);
-        setTimeWorked(getTimeWorked() + 1);
-        System.out.println("getTimeWorked() = " + getTimeWorked());*/
+
+		if (healthyHuman.size() > 0) {
+			int index = RandomHelper.nextIntFromTo(0, healthyHuman.size() - 1);
+			Object obj = healthyHuman.get(index);
+			NdPoint spacePt = space.getLocation(obj);
+			Context<Object> context = ContextUtils.getContext(obj);
+			context.remove(obj);
+			SickHuman sickHuman = new SickHuman(space, grid, "incubando", this.timeWorked, this.timeEntertained, false);
+			sickHuman.setGridHousePoint(this.getGridHousePoint());
+			context.add(sickHuman);
+			space.moveTo(sickHuman, spacePt.getX(), spacePt.getY());
+			grid.moveTo(sickHuman, pt.getX(), pt.getY());
+			
+		}
 	}
 
 
