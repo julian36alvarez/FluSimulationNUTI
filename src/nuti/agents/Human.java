@@ -21,7 +21,7 @@ public abstract class Human {
     protected int timeWorked;
     protected int timeEntertained;
     protected boolean usesMask;
-    private int idHouse;
+    private GridPoint gridHousePoint;
 
     public Human(ContinuousSpace<Object> space, Grid<Object> grid, String status, int timeWorked, int timeEntertained, boolean usesMask) {
         this.space = space;
@@ -74,6 +74,7 @@ public abstract class Human {
             System.out.println("getTimeEntertained() = " + getTimeEntertained());
         } else {
             System.out.println("Stay at home");
+            space.moveTo(this, gridHousePoint.getX(), gridHousePoint.getY());
         }
 
 
@@ -155,11 +156,13 @@ public abstract class Human {
         this.usesMask = usesMask;
     }
 
-    public int getIdHouse() {
-        return idHouse;
+    public GridPoint getGridHousePoint() {
+        return gridHousePoint;
     }
 
-    public void setIdHouse(int idHouse) {
-        this.idHouse = idHouse;
+    public void setGridHousePoint(GridPoint gridHousePoint) {
+        this.gridHousePoint = gridHousePoint;
     }
+
+   
 }

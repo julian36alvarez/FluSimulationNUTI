@@ -1,7 +1,5 @@
 package nuti.agents;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import repast.simphony.context.Context;
 import repast.simphony.context.space.continuous.ContinuousSpaceFactory;
@@ -12,18 +10,14 @@ import repast.simphony.context.space.grid.GridFactoryFinder;
 import repast.simphony.dataLoader.ContextBuilder;
 import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.parameter.Parameters;
-import repast.simphony.random.RandomHelper;
 import repast.simphony.space.continuous.ContinuousSpace;
 import repast.simphony.space.continuous.NdPoint;
 import repast.simphony.space.continuous.RandomCartesianAdder;
-import repast.simphony.space.grid.BouncyBorders;
 import repast.simphony.space.grid.Grid;
 import repast.simphony.space.grid.GridBuilderParameters;
 import repast.simphony.space.grid.GridPoint;
 import repast.simphony.space.grid.SimpleGridAdder;
 import repast.simphony.space.grid.WrapAroundBorders;
-import repast.simphony.util.SimUtilities;
-import repast.simphony.util.collections.IndexedIterable;
 
 
 public class JNutiAgentsBuilder implements ContextBuilder<Object> {
@@ -114,11 +108,12 @@ public class JNutiAgentsBuilder implements ContextBuilder<Object> {
             // Agregar el humano a la residencia más cercana
             if (closestResidence != null) {
                 closestResidence.addHuman(human);
-                human.setIdHouse(closestResidence.getId());
+                
                 humanCountAdded++;
 
                 GridPoint pt = grid.getLocation(closestResidence);
                 //System.out.println( pt.getX() +" - "+ pt.getY());
+                human.setGridHousePoint(pt);
                 space.moveTo(human, pt.getX(), pt.getY());
 
                 if (humanCountAdded % humanCountPerResidence == 0) {

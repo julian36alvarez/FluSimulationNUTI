@@ -16,8 +16,6 @@ public class SickHuman extends Human{
         super(space, grid, status, timeWorked, timeEntertained, usesMask);
     }
 
-
-
 	
 	 public int getIncubationTime() {
 	        return incubationTime;
