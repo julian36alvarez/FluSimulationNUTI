@@ -11,6 +11,7 @@ Repast Symphony permite usar las ventajas de tener múltiples procesadores escon
 # Demo
 
 ![](./nuti.gif)
+![](./nuti2.gif)
 
 # Integrantes
 
