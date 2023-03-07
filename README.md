@@ -13,6 +13,12 @@ Repast Symphony permite usar las ventajas de tener múltiples procesadores escon
 ![](./nuti.gif)
 ![](./nuti2.gif)
 
+# Simulación
+Al final de las 4 semanas, un total de 8064 ticks, se evidencia que hay:
+
+* Un 70% de personas infectadas.
+* Un 30% de personas sanas.
+
 # Integrantes
 
 - [Julián Álvarez](https://github.com/julian36alvarez)
