@@ -7,10 +7,6 @@
       <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
     <entry>
-      <string>nuti.agents.IncubatingHuman</string>
-      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
-    </entry>
-    <entry>
       <string>nuti.agents.HealthyHuman</string>
       <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
@@ -31,10 +27,6 @@
     <entry>
       <string>nuti.agents.SickHuman</string>
       <string>nuti.agents.SickHuman.style_0.xml</string>
-    </entry>
-    <entry>
-      <string>nuti.agents.IncubatingHuman</string>
-      <string>nuti.agents.IncubatingHuman.style_0.xml</string>
     </entry>
     <entry>
       <string>nuti.agents.HealthyHuman</string>
@@ -73,7 +65,7 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>-1602530343</hashCode>
+    <hashCode>434108595</hashCode>
   </schedParams>
   <layoutClassName>foo.bar.baz</layoutClassName>
   <layoutProjection>space</layoutProjection>
@@ -84,12 +76,8 @@
       <int>2</int>
     </entry>
     <entry>
-      <string>nuti.agents.IncubatingHuman</string>
-      <int>4</int>
-    </entry>
-    <entry>
       <string>nuti.agents.HealthyHuman</string>
-      <int>5</int>
+      <int>4</int>
     </entry>
     <entry>
       <string>nuti.agents.Entertainment</string>
