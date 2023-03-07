@@ -9,8 +9,8 @@ public class SickHuman extends Human{
 	
 
     
-    public SickHuman(ContinuousSpace<Object> space, Grid<Object> grid, String status, int timeWorked, int timeEntertained, boolean usesMask) {
-        super(space, grid, status, timeWorked, timeEntertained, usesMask);
+    public SickHuman(ContinuousSpace<Object> space, Grid<Object> grid, int timeWorked, int timeEntertained, boolean usesMask) {
+        super(space, grid, timeWorked, timeEntertained, usesMask);
     }
 
 	
@@ -22,7 +22,7 @@ public class SickHuman extends Human{
 		return (step > 1052 && step < 3168);
 	}
 	
-	public boolean isCure() {
+	public boolean isCured() {
 		return (step > 3168);
 	}
 	

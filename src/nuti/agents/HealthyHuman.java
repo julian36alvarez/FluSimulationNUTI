@@ -9,13 +9,9 @@ public class HealthyHuman extends Human{
 
 
 	int step;
-	public HealthyHuman(ContinuousSpace<Object> space, Grid<Object> grid, String status, int timeWorked, int timeEntretained,
+	public HealthyHuman(ContinuousSpace<Object> space, Grid<Object> grid,  int timeWorked, int timeEntretained,
             boolean usesMask) {
-	super(space, grid, status, timeWorked, timeEntretained, usesMask);
-	}
-
-	public void infect() {
-		status = "incubando";
+	super(space, grid,  timeWorked, timeEntretained, usesMask);
 	}
 
 	@Override
@@ -24,7 +20,7 @@ public class HealthyHuman extends Human{
 	}
 
 	@Override
-	protected boolean isCure() {
+	protected boolean isCured() {
 		return true;
 	}
 

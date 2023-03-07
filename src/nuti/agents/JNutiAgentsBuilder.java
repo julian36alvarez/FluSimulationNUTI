@@ -9,6 +9,7 @@ import repast.simphony.context.space.grid.GridFactory;
 import repast.simphony.context.space.grid.GridFactoryFinder;
 import repast.simphony.dataLoader.ContextBuilder;
 import repast.simphony.engine.environment.RunEnvironment;
+import repast.simphony.engine.schedule.ScheduledMethod;
 import repast.simphony.parameter.Parameters;
 import repast.simphony.space.continuous.ContinuousSpace;
 import repast.simphony.space.continuous.NdPoint;
@@ -18,9 +19,11 @@ import repast.simphony.space.grid.GridBuilderParameters;
 import repast.simphony.space.grid.GridPoint;
 import repast.simphony.space.grid.SimpleGridAdder;
 import repast.simphony.space.grid.WrapAroundBorders;
+import repast.simphony.util.ContextUtils;
 
 
 public class JNutiAgentsBuilder implements ContextBuilder<Object> {
+	
 
     @Override
     public Context build(Context<Object> context) {
@@ -30,7 +33,6 @@ public class JNutiAgentsBuilder implements ContextBuilder<Object> {
                 "infection network", context, true);
         netBuilder.buildNetwork();
 
-        // Grid y Space tienen 10000 que representa 10km
         ContinuousSpaceFactory spaceFactory = ContinuousSpaceFactoryFinder
                 .createContinuousSpaceFactory(null);
         ContinuousSpace<Object> space = spaceFactory.createContinuousSpace(
@@ -54,11 +56,9 @@ public class JNutiAgentsBuilder implements ContextBuilder<Object> {
 
 
         for (int i = 0; i < residenceCount; i++) {
-            context.add(new Residence(grid, space, 0, i));
+            context.add(new Residence(grid, space, residenceMax, i));
         }
 
-
-        // Adding other agents
         for (int i = 0; i < entretainmentCount; i++) {
             context.add(new Entertainment());
         }
@@ -70,21 +70,16 @@ public class JNutiAgentsBuilder implements ContextBuilder<Object> {
         for (int i = 0; i < humanCount; i++) {
             Human human;
             if (i < sickHumanCount) {
-                human = new SickHuman(space, grid, "incubando", 40, 20, false);
+                human = new SickHuman(space, grid, 0, 0, false);
             } else {
-                human = new HealthyHuman(space, grid, "sano", 40, 20, false);
+                human = new HealthyHuman(space, grid, 0, 0, false);
             }
             context.add(human);
 
-            boolean flat = true;
-
-            if (flat) {
-                for (Object obj : context.getObjects(Object.class)) {
-                    NdPoint pt = space.getLocation(obj);
-                    grid.moveTo(obj, (int) pt.getX(), (int) pt.getY());
-                    flat = false;
-                }
-            }
+			for (Object obj : context.getObjects(Object.class)) {
+				NdPoint pt = space.getLocation(obj);
+				grid.moveTo(obj, (int) pt.getX(), (int) pt.getY());
+			}
 
             int humanCountPerResidence = residenceMax;
             int humanCountAdded = 0;
@@ -123,16 +118,17 @@ public class JNutiAgentsBuilder implements ContextBuilder<Object> {
             }
         }
 
-        // parar luego de 4 semanas, cada tick son 5 minutos -> total de 8064 ticks
         // 1 semana son 2016 ticks
         // 1 dia son 288 ticks
-
-	    /*if (RunEnvironment.getInstance().isBatch()) {
-	        RunEnvironment.getInstance().endAt(40320);
-	    }*/
+        // parar luego de 4 semanas -> total de 8064 ticks
         RunEnvironment.getInstance().endAt(8064);
-
+        
+       
         return context;
     }
+    
+    
+    
+
 
 }
